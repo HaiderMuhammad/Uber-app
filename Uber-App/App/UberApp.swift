@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct UberApp: App {
+    @StateObject var locationViewModel = LocationSearchViewModel()
 //    var sharedModelContainer: ModelContainer = {
 //        let schema = Schema([
 //            Item.self,
@@ -26,6 +27,7 @@ struct UberApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+            .environmentObject(locationViewModel)
         }
 //        .modelContainer(sharedModelContainer)
     }
