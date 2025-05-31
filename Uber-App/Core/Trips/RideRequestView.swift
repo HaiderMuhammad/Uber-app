@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RideRequestView: View {
+    
+    @State private var selectedRideType: RideType = .uberX
+    
     var body: some View {
         VStack {
             Capsule()
@@ -75,24 +78,36 @@ struct RideRequestView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 12) {
-                    ForEach(0..<3 ) { _ in
+                    ForEach(RideType.allCases) { type in
                         VStack(alignment: .leading) {
-                            Image("car")
+                            Image(type.imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 65, height: 65)
+                                .frame(width: 65, height: 60)
                             
-                            VStack(spacing: 4) {
-                                Text("UberX")
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(type.description)
                                 
                                 Text("$4.57")
                             }
                             .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(selectedRideType == type
+                                             ? .white : .black)
                             .padding(8)
                         }
-                        .frame(width: 112, height: 140)
-                        .background(Color(.systemGroupedBackground))
+                        .frame(width: 112, height: 150)
+                        .background(Color(
+                            type == selectedRideType
+                            ? .systemBlue
+                            : .systemGroupedBackground
+                        ))
+                        .scaleEffect(type == selectedRideType ? 1.2 : 1.0)
                         .cornerRadius(10)
+                        .onTapGesture {
+                            withAnimation(.spring) {
+                                selectedRideType = type
+                            }
+                        }
                     }
                 }
             }
