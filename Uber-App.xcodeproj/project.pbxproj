@@ -10,9 +10,22 @@
 		1093E1362DEA095C00CB1F7E /* Uber-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		10E6CE892DEB277E007C6FF5 /* Exceptions for "Uber-App" folder in "Uber-App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/UberApp.swift,
+			);
+			target = 1093E1352DEA095C00CB1F7E /* Uber-App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1093E1382DEA095C00CB1F7E /* Uber-App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				10E6CE892DEB277E007C6FF5 /* Exceptions for "Uber-App" folder in "Uber-App" target */,
+			);
 			path = "Uber-App";
 			sourceTree = "<group>";
 		};
