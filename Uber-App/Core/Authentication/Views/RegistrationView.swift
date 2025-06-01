@@ -59,7 +59,9 @@ struct RegistrationView: View {
                     
                     Button{
                         
-                        authViewModel.registerUser(withEmail: <#T##String#>, password: <#T##String#>, fullname: <#T##String#>)
+                        authViewModel.registerUser(withEmail: email,
+                                                   password: password,
+                                                   fullname: fullname)
                         
                     } label: {
                         HStack {

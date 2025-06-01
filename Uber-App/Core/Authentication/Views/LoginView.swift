@@ -11,6 +11,7 @@ struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
     var body: some View {
         NavigationStack {
@@ -103,6 +104,8 @@ struct LoginView: View {
                         HStack(spacing: 24) {
                             Button{
                                 
+                                authViewModel.signIn(withEmail: email, password: password)
+                                
                             } label: {
                                 Image("facebook-logo")
                                     .resizable()
@@ -124,6 +127,7 @@ struct LoginView: View {
                     
                     // sign in button
                     Button{
+                        authViewModel.signIn(withEmail: email, password: password)
                         
                     } label: {
                         HStack {
