@@ -13,6 +13,7 @@ struct RegistrationView: View {
     @State private var email = ""
     @State private var password = ""
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
     var body: some View {
         ZStack {
@@ -43,12 +44,13 @@ struct RegistrationView: View {
                                          placholder: "Enter your name")
                         
                         CustomInputField(text: $email,
-                                         title: "Email",
-                                         placholder: "Enter your email")
+                                         title: "Email Address",
+                                         placholder: "example@gmail.com")
                         
                         CustomInputField(text: $password,
-                                         title: "Password",
-                                         placholder: "Enter your password")
+                                         title: "Create Password",
+                                         placholder: "Enter your password",
+                                         isScureField: true)
                     }
                     .padding(.leading )
                     
@@ -56,6 +58,8 @@ struct RegistrationView: View {
                     // sign up
                     
                     Button{
+                        
+                        authViewModel.registerUser(withEmail: <#T##String#>, password: <#T##String#>, fullname: <#T##String#>)
                         
                     } label: {
                         HStack {
