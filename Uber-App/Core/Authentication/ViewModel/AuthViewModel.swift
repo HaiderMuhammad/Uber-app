@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 
 
 class AuthViewModel: ObservableObject {
@@ -35,8 +36,13 @@ class AuthViewModel: ObservableObject {
                 print("Failed to Sign up user: \(error.localizedDescription) ")
                 return
             }
+            guard let firebaseUser = result?.user else { return }
+            self.userSession = firebaseUser
             
-            self.userSession = result?.user
+            let user = User(fullName: fullname, email: email, uid: firebaseUser.uid)
+            guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
+            
+            Firestore.firestore().collection("users").document(firebaseUser.uid).setData(encodedUser)
         }
     }
     
