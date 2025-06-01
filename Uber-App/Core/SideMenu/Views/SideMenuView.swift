@@ -59,8 +59,6 @@ struct SideMenuView: View {
             .padding(.leading, 16)
             
             
-            
-            
             // option list
             VStack {
                 ForEach(SideMenuViewModel.allCases) { viewModel in
