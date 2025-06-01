@@ -6,7 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		10033A442DECA6C700E5E425 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10033A432DECA6C700E5E425 /* GoogleService-Info.plist */; };
+		10033A472DECAA6100E5E425 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 10033A462DECAA6100E5E425 /* FirebaseAuth */; };
+		10033A492DECAA6100E5E425 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 10033A482DECAA6100E5E425 /* FirebaseDatabase */; };
+		10033A4B2DECAA6100E5E425 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 10033A4A2DECAA6100E5E425 /* FirebaseFirestore */; };
+		10033A4D2DECAA6100E5E425 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 10033A4C2DECAA6100E5E425 /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		10033A432DECA6C700E5E425 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1093E1362DEA095C00CB1F7E /* Uber-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -23,6 +32,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10033A492DECAA6100E5E425 /* FirebaseDatabase in Frameworks */,
+				10033A4D2DECAA6100E5E425 /* FirebaseStorage in Frameworks */,
+				10033A472DECAA6100E5E425 /* FirebaseAuth in Frameworks */,
+				10033A4B2DECAA6100E5E425 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +45,7 @@
 		1093E12D2DEA095C00CB1F7E = {
 			isa = PBXGroup;
 			children = (
+				10033A432DECA6C700E5E425 /* GoogleService-Info.plist */,
 				1093E1382DEA095C00CB1F7E /* Uber-App */,
 				1093E1372DEA095C00CB1F7E /* Products */,
 			);
@@ -65,6 +79,10 @@
 			);
 			name = "Uber-App";
 			packageProductDependencies = (
+				10033A462DECAA6100E5E425 /* FirebaseAuth */,
+				10033A482DECAA6100E5E425 /* FirebaseDatabase */,
+				10033A4A2DECAA6100E5E425 /* FirebaseFirestore */,
+				10033A4C2DECAA6100E5E425 /* FirebaseStorage */,
 			);
 			productName = "Uber-App";
 			productReference = 1093E1362DEA095C00CB1F7E /* Uber-App.app */;
@@ -94,6 +112,9 @@
 			);
 			mainGroup = 1093E12D2DEA095C00CB1F7E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				10033A452DECAA6100E5E425 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1093E1372DEA095C00CB1F7E /* Products */;
 			projectDirPath = "";
@@ -109,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10033A442DECA6C700E5E425 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +348,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10033A452DECAA6100E5E425 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.13.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10033A462DECAA6100E5E425 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10033A452DECAA6100E5E425 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		10033A482DECAA6100E5E425 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10033A452DECAA6100E5E425 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		10033A4A2DECAA6100E5E425 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10033A452DECAA6100E5E425 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		10033A4C2DECAA6100E5E425 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10033A452DECAA6100E5E425 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1093E12E2DEA095C00CB1F7E /* Project object */;
 }
