@@ -19,13 +19,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct UberApp: App {
-    @StateObject var locationViewModel = LocationSearchViewModel()
+    @StateObject var locationViewModel  = LocationSearchViewModel()
+    @StateObject var authViewModel      = AuthViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {
             HomeView()
             .environmentObject(locationViewModel)
+            .environmentObject(authViewModel)
         }
     }
 }
