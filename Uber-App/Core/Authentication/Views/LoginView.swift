@@ -50,29 +50,16 @@ struct LoginView: View {
                 // input fields
                 VStack(spacing: 32) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Email Address")
-                            .foregroundStyle(.white)
-                            .fontWeight(.semibold)
-                            .font(.footnote)
+                        CustomInputField(text: $email,
+                                         title: "Email Address",
+                                         placholder: "email@example.com")
                         
-                        TextField("name@example", text: $email)
-                            .foregroundStyle(.white)
+                        CustomInputField(text: $password,
+                                         title: "Password",
+                                         placholder: "Enter Your Password",
+                                         isScureField: true
+                        )
                         
-                        Rectangle()
-                            .foregroundStyle(Color(.init(white: 1, alpha: 0.3)))
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 0.7)
-                        
-                        Text("Password")
-                            .foregroundStyle(.white)
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                        
-                        TextField("Enter your password", text: $password)
-                            .foregroundStyle(.white)
-                        
-                        Rectangle()
-                            .foregroundStyle(Color(.init(white: 1, alpha: 0.3)))
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 0.7)
                             
                     }
                     
@@ -145,8 +132,8 @@ struct LoginView: View {
                         Image(systemName: "arrow.right")
                             .foregroundStyle(.black)
                     }
+                    .frame(width: UIScreen.main.bounds.width - 32, height: 50)
                 }
-                .frame(width: UIScreen.main.bounds.width - 32, height: 50)
                 .background(.white)
                 .cornerRadius(10)
                 
