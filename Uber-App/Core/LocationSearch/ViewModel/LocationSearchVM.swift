@@ -5,13 +5,15 @@
 //  Created by Haider Muhammed on 5/31/25.
 //
 
-import Foundation
 import MapKit
+import Firebase
+import FirebaseAuth
+
 
 
 enum LocationResultsViewConfig {
     case ride
-    case saveLocation
+    case saveLocation(SavedLcationViewModel)
 }
 
 class LocationSearchViewModel: NSObject, ObservableObject {
@@ -41,20 +43,33 @@ class LocationSearchViewModel: NSObject, ObservableObject {
     //MARK: - Helpers
     
     func selectLocation(_ localSearch: MKLocalSearchCompletion, config: LocationResultsViewConfig) {
-        switch config {
-        case .ride:
-            locationSearch(forLocalSearchCompletion: localSearch) { response, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                guard let item = response?.mapItems.first else { return }
-                let cooredinate = item.placemark.coordinate
-                self.selectedUberLocation = UberLocation(title: localSearch.title,
-                                                         coordinate: cooredinate)
+        
+        
+        locationSearch(forLocalSearchCompletion: localSearch) { response, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
             }
-        case .saveLocation:
-            print("DEBUG: Saved location")
+            guard let item = response?.mapItems.first else { return }
+            let cooredinate = item.placemark.coordinate
+            
+            switch config {
+            case .ride:
+                self.selectedUberLocation = UberLocation(title: localSearch.title, coordinate: cooredinate)
+                
+            case .saveLocation(let viewModel):
+                guard let uid = Auth.auth().currentUser?.uid else { return }
+                let savedLocation = SavedLocation(
+                    title: localSearch.title,
+                    address: localSearch.subtitle,
+                    coordinates: GeoPoint(latitude: cooredinate.latitude,
+                                          longitude: cooredinate.longitude))
+                
+                guard let encodedLocation = try? Firestore.Encoder().encode(savedLocation) else { return }
+                Firestore.firestore().collection("users").document(uid).updateData([
+                    viewModel.dataaseKey: encodedLocation
+                ])
+            }
         }
     }
     
@@ -105,7 +120,7 @@ class LocationSearchViewModel: NSObject, ObservableObject {
     }
     
     func configurePickupAndDropOff(with expectedTravelTime: Double) {
-         
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
         

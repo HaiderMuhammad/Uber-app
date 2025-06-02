@@ -40,4 +40,13 @@ enum SavedLcationViewModel: Int, CaseIterable, Identifiable {
             return "Add Work"
         }
     }
+    
+    var dataaseKey: String {
+        switch self {
+        case .home:
+            return "homeLocation"
+        case .work:
+            return "workLocation"
+        }
+    }
 }
