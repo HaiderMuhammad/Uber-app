@@ -35,7 +35,6 @@ struct MapViewActionButton: View {
         switch state {
         case .noInput:
             showSideMenu.toggle()
-            break
         case .searchingForLocation:
             mapState = .noInput
         case .locationSelected, .polylineAdded:
