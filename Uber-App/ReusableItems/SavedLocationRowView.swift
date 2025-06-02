@@ -33,5 +33,5 @@ struct SavedLocationRowView: View {
 }
 
 #Preview {
-    SavedLocationRowView(viewModel: SavedLcationViewModel.home, user:  User(fullName: "", email: "", uid: ""))
+    SavedLocationRowView(viewModel: SavedLcationViewModel.home, user: DeveloperPreview.shared.mockUser)
 }

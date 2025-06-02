@@ -43,9 +43,16 @@ class AuthViewModel: ObservableObject {
             guard let firebaseUser = result?.user else { return }
             self.userSession = firebaseUser
             
-            let user = User(fullName: fullname, email: email, uid: firebaseUser.uid)
-            guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
+            let user = User(
+                fullName: fullname,
+                email: email,
+                uid: firebaseUser.uid,
+                coordinates: GeoPoint(latitude: 37.38, longitude: -122.05),
+                accountType: .passenger
+            )
             
+            guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
+             
             Firestore.firestore().collection("users").document(firebaseUser.uid).setData(encodedUser)
             
             self.fetchUser()
@@ -56,6 +63,7 @@ class AuthViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.userSession = nil
+            self.currentUser = nil
         } catch {
             print("Failed to signout user: \(error.localizedDescription)")
         }
