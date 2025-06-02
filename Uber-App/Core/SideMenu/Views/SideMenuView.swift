@@ -97,8 +97,6 @@ struct SideMenuView: View {
 
 #Preview {
     NavigationStack {
-        SideMenuView(user: User(fullName: "Arthur Morgen",
-                                email: "arthur@gmail.com",
-                                uid: "1212343"))
+        SideMenuView(user: DeveloperPreview.shared.mockUser)
     }
 }
