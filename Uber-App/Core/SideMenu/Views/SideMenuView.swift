@@ -50,7 +50,7 @@ struct SideMenuView: View {
                                 .font(.title2)
                                 .imageScale(.medium)
                             
-                            Text("MAke Money Driving")
+                            Text("Make Money Driving")
                                 .font(.system(size: 16, weight: .semibold))
                                 .padding(6)
                         }
@@ -83,7 +83,6 @@ struct SideMenuView: View {
                         Text("Wallet")
                     case .settings:
                         SettingsView(user: user)
-//                            .navigationBarBackButtonHidden()
                     case .messages:
                         Text("Messages")
                     }
