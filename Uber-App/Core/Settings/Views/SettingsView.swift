@@ -37,6 +37,7 @@ struct SettingsView: View {
                             .font(.title2)
                             .foregroundStyle(.gray)
                     }
+                    .padding(8)
                 }
                 
                 Section("Favorites") {
@@ -70,9 +71,13 @@ struct SettingsView: View {
                 }
             }
         }
+        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
 #Preview {
-    SettingsView()
+    NavigationStack {
+        SettingsView()
+    }
 }
