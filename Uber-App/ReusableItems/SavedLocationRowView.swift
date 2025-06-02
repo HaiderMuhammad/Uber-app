@@ -10,6 +10,7 @@ import SwiftUI
 struct SavedLocationRowView: View {
     
     let viewModel: SavedLcationViewModel
+    let user: User
     
     var body: some View {
         HStack(spacing: 12) {
@@ -23,7 +24,7 @@ struct SavedLocationRowView: View {
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(.black)
                 
-                Text(viewModel.subtitle)
+                Text(viewModel.subtitle(forUser: user))
                     .font(.system(size: 14))
                     .foregroundStyle(.gray)
             }
@@ -32,5 +33,5 @@ struct SavedLocationRowView: View {
 }
 
 #Preview {
-    SavedLocationRowView(viewModel: SavedLcationViewModel.home)
+    SavedLocationRowView(viewModel: SavedLcationViewModel.home, user:  User(fullName: "", email: "", uid: ""))
 }
