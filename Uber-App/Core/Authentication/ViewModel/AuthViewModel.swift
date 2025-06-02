@@ -52,7 +52,7 @@ class AuthViewModel: ObservableObject {
                 uid: firebaseUser.uid, 
                 coordinates: GeoPoint(latitude: location.latitude,
                                       longitude: location.longitude),
-                accountType: .passenger
+                accountType: .driver
             )
             
             

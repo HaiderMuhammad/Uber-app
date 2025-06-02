@@ -10,6 +10,9 @@ import Firebase
 
 
 class HomeViewModel: ObservableObject {
+    
+    @Published var drivers =  [User]()
+    
     init () {
         fetchDrivers()
     }
@@ -24,7 +27,7 @@ class HomeViewModel: ObservableObject {
                  
                 do {
                     let drivers = try documents.map { try $0.data(as: User.self) }
-                    print("DEBUG: Drivers \(documents.count)")
+                    self.drivers = drivers
 
                 } catch {
                     print("Failed to decode users: \(error)")
