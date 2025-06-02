@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    private let user: User
+    @EnvironmentObject private var viewModel: AuthViewModel
+    
+    init(user: User) {
+        self.user = user
+    }
+    
     var body: some View {
         VStack {
             List {
@@ -21,10 +29,10 @@ struct SettingsView: View {
                             .frame(width: 64, height: 64)
                         
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Arthur Morgen")
+                            Text(user.fullName)
                                 .font(.system(size: 16, weight: .semibold))
                             
-                            Text("arthur@gmail.com")
+                            Text(user.email)
                                 .font(.system(size: 14))
                                 .tint(.black)
                                 .opacity(0.77)
@@ -65,9 +73,12 @@ struct SettingsView: View {
                                     title: "Make Money Driving",
                                     tintColor: .green)
                     
-                    SettingsRowView(imageName: "arrow.left.square .fill",
+                    SettingsRowView(imageName: "arrow.left.square.fill",
                                     title: "Sign Out",
                                     tintColor: .red)
+                    .onTapGesture {
+                        viewModel.signout()
+                    }
                 }
             }
         }
@@ -78,6 +89,8 @@ struct SettingsView: View {
 
 #Preview {
     NavigationStack {
-        SettingsView()
+        SettingsView(user: User(fullName: "Arthur Morgen",
+                                email: "arthur@gmail.com",
+                                uid: "1212343"))
     }
 }
