@@ -26,7 +26,9 @@ class AuthViewModel: ObservableObject {
                 return
             }
             
-            self.userSession = result?.user
+            guard let user = result?.user else { return }
+            self.userSession = user
+            self.fetchUser()
             print("Sign in successfully \(result!.user.uid)")
             
         }
@@ -45,6 +47,8 @@ class AuthViewModel: ObservableObject {
             guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
             
             Firestore.firestore().collection("users").document(firebaseUser.uid).setData(encodedUser)
+            
+            self.fetchUser()
         }
     }
     
