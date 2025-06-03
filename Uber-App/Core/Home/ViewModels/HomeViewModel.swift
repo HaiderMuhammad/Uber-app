@@ -112,7 +112,8 @@ extension HomeViewModel {
                 dropoffLocation: dropoffGeoPoint,
                 tripCost: tripCost,
                 distanceToPassenger: 0,
-                travelTimeToPasseneger: 0
+                travelTimeToPasseneger: 0,
+                state: .requested
                 
             )
             
@@ -139,6 +140,23 @@ extension HomeViewModel {
                     self.trip?.distanceToPassenger = route.distance
                     self.trip?.travelTimeToPasseneger = Int(route.expectedTravelTime / 60)
                 }
+            }
+    }
+    
+    func rejectTrip() {
+        updateTrip(state: .rejected)
+    }
+    
+    func acceptTrip() {
+        updateTrip(state: .accepted)
+    }
+    
+    func updateTrip(state: TripState) {
+        
+        guard let trip = trip else { return }
+        Firestore.firestore().collection("trips").document(trip.id).updateData(
+            ["state": state.rawValue]) { _ in
+                print("DEBUG: Did update trip with state: \(state)")
             }
     }
 }
