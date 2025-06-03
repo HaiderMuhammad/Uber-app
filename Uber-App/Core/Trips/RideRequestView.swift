@@ -151,6 +151,7 @@ struct RideRequestView: View {
             // request ride view
             
             Button {
+                homeViewModel.requestTrip()
                 
             } label: {
                  Text("CONFIRM RIDE")
