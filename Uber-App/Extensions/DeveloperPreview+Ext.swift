@@ -35,7 +35,8 @@ class DeveloperPreview {
         dropoffLocation: .init(latitude: 37.123, longitude: -122.1),
         tripCost: 15.4,
         distanceToPassenger: 1000,
-        travelTimeToPasseneger: 40
+        travelTimeToPasseneger: 40,
+        state: .requested
     )
      
     let mockUser = User(
