@@ -33,7 +33,9 @@ class DeveloperPreview {
         pickupLocationAddress: "123 Main St, San Francisco",
         pickupLocation: .init(latitude: 37.123, longitude: -122.1),
         dropoffLocation: .init(latitude: 37.123, longitude: -122.1),
-        tripCost: 15.4
+        tripCost: 15.4,
+        distanceToPassenger: 1000,
+        travelTimeToPasseneger: 40
     )
      
     let mockUser = User(
