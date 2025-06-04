@@ -94,12 +94,10 @@ extension HomeViewModel {
         
         getPlaceMark(forLcoation: userLocation) { placemark, error in
             guard let placemark = placemark else { return }
-            
             let tripCost = self.computeRidePrice(forType: .uberX)
             
             let trip = Trip(
-                id: NSUUID().uuidString,
-                passengerUid: currentUser.uid,
+                  passengerUid: currentUser.uid,
                 driverUid: driver.uid,
                 passengerName: currentUser.fullName,
                 driverName: driver.fullName,

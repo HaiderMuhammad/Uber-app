@@ -11,6 +11,7 @@ import MapKit
 struct AcceptTripView: View {
     
     @State private var cameraPosition: MapCameraPosition
+    @EnvironmentObject private var viewModel: HomeViewModel
     let trip: Trip
     let annotationItem: UberLocation
     
@@ -159,6 +160,7 @@ struct AcceptTripView: View {
             
             HStack {
                 Button {
+                    viewModel.rejectTrip()
                     
                 }label: {
                     Text("Reject")
@@ -175,7 +177,7 @@ struct AcceptTripView: View {
                 Spacer()
                 
                 Button {
-                    
+                    viewModel.acceptTrip()
                 }label: {
                     Text("Accept")
                         .font(.headline)

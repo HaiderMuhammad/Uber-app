@@ -21,7 +21,6 @@ class DeveloperPreview {
     
     
     let mockTrip = Trip(
-        id: NSUUID().uuidString,
         passengerUid: NSUUID().uuidString,
         driverUid: NSUUID().uuidString,
         passengerName: "Haider Muhammad",
