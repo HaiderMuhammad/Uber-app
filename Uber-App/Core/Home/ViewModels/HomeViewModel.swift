@@ -72,13 +72,16 @@ extension HomeViewModel {
     func addTripObserverForPassenger() {
         guard let currentUser = currentUser, currentUser.accountType == .passenger else { return }
         
-        Firestore.firestore().collection("trips").whereField("passengerUid", isEqualTo: currentUser.uid).addSnapshotListener { snapshot, _ in
+        Firestore.firestore().collection("trips")
+            .whereField("passengerUid", isEqualTo: currentUser.uid)
+            .addSnapshotListener { snapshot, _ in
             guard let change = snapshot?.documentChanges.first,
                   change.type == .added
                     || change.type == .modified else { return }
             
             guard let trip = try? change.document.data(as: Trip.self) else { return }
             print("DEBUG: updated trip: \(trip.state)")
+                self.trip = trip
             
         }
     }
@@ -113,13 +116,13 @@ extension HomeViewModel {
             let tripCost = self.computeRidePrice(forType: .uberX)
             
             let trip = Trip(
-                  passengerUid: currentUser.uid,
+                passengerUid: currentUser.uid,
                 driverUid: driver.uid,
                 passengerName: currentUser.fullName,
                 driverName: driver.fullName,
                 passengerLocation: currentUser.coordinates,
                 driverLocation: driver.coordinates,
-                pickupLocationName: placemark.name ?? "Apple Campus",
+                pickupLocationName: placemark.name ?? "Current Location",
                 dropoffLocationName: dropOffLocation.title,
                 pickupLocationAddress: self.addressFromPlacemark(placemark),
                 pickupLocation: currentUser.coordinates,
