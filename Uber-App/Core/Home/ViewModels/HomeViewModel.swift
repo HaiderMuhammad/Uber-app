@@ -153,7 +153,8 @@ extension HomeViewModel {
                 
                 self.trip = trip
                 
-                self.getDestinationRoute(from: trip.driverLocation.toCoordinate(), to: trip.pickupLocation.toCoordinate()) { route in
+                self.getDestinationRoute(from: trip.driverLocation.toCoordinate(),
+                                         to: trip.pickupLocation.toCoordinate()) { route in
                     self.trip?.distanceToPassenger = route.distance
                     self.trip?.travelTimeToPasseneger = Int(route.expectedTravelTime / 60)
                 }
@@ -169,12 +170,17 @@ extension HomeViewModel {
     }
     
     func updateTrip(state: TripState) {
-        
         guard let trip = trip else { return }
-        Firestore.firestore().collection("trips").document(trip.id).updateData(
-            ["state": state.rawValue]) { _ in
-                print("DEBUG: Did update trip with state: \(state)")
-            }
+        
+        var data = ["state": trip.state.rawValue]
+        if state == .accepted {
+            data["travelTimeToPasseneger"] = trip.travelTimeToPasseneger
+        }
+        Firestore.firestore().collection("trips").document(trip.id).updateData(data) { _ in
+            
+            print("DEBUG: Did update trip with state: \(state)")
+            print(trip.travelTimeToPasseneger)
+        }
     }
 }
 
