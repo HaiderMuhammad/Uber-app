@@ -12,6 +12,9 @@ enum TripState: Int, Codable {
     case requested
     case rejected
     case accepted
+    case passengerCancelled
+    case driverCancelled
+    
     
 }
 
