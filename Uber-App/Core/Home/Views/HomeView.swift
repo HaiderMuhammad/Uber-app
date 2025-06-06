@@ -119,6 +119,10 @@ extension HomeView {
                     self.mapState = .tripAccepted
                 case .rejected:
                     self.mapState = .tripRejected
+                case .driverCancelled:
+                    print("Driver cancelled trip")
+                case .passengerCancelled:
+                    print("Passenger cancelled trip")
                 }
                 
                 print("DEBUG: Map state updated to: \(self.mapState)")

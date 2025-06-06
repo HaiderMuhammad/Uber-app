@@ -110,7 +110,7 @@ extension HomeViewModel {
         let dropoffGeoPoint = GeoPoint(latitude: dropOffLocation.coordinate.latitude,
                                        longitude: dropOffLocation.coordinate.longitude)
         
-        let userLocation = CLLocation(latitude: currentUser.coordinates.latitude, longitude: currentUser.coordinates.longitude)
+        let userLocation = CLLocation(latitude: currentUser.coordinates.latitude,longitude: currentUser.coordinates.longitude)
         
         getPlaceMark(forLcoation: userLocation) { placemark, error in
             guard let placemark = placemark else { return }
@@ -187,6 +187,10 @@ extension HomeViewModel {
     
     func acceptTrip() {
         updateTrip(state: .accepted)
+    }
+    
+    func cancelTripAsDriver() {
+        updateTrip(state: .driverCancelled)
     }
     
     func updateTrip(state: TripState) {
