@@ -104,7 +104,7 @@ struct TripAcceptedView: View {
             }
             
             Button {
-                print("DEBUG: Cancel Trip")
+                homeViewModel.cancelTripAsPassenger()
                 
             } label: {
                  Text("CANCEL TRIP")
