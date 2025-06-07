@@ -48,6 +48,26 @@ class HomeViewModel: NSObject, ObservableObject {
     }
     
     // MARK: - Helpers
+    
+    var tripCancelledMessage: String {
+        guard let user = currentUser, let trip = trip else { return "" }
+        if user.accountType == .passenger {
+            if trip.state == .driverCancelled {
+                return "Your driver cancelled this trip"
+            } else if trip.state == .passengerCancelled{
+                return "Your trip has been cancelled"
+            }
+        } else {
+            if trip.state == .driverCancelled {
+                return "You trip has been cancelled"
+            } else if trip.state == .passengerCancelled{
+                return "Your driver cancelled this trip"
+            }
+        }
+        
+        return ""
+    }
+    
     func viewForState(_ state: MapViewState, user: User) -> some View {
         switch state {
             
@@ -72,10 +92,8 @@ class HomeViewModel: NSObject, ObservableObject {
                 }
             }
             
-        case .tripCancelldByPassenger:
-            return AnyView(Text("Trip Cancelled by passenger"))
-        case .tripCancelldByDriver:
-            return AnyView(Text("Trip Cancelled by driver"))
+        case .tripCancelldByPassenger, .tripCancelldByDriver:
+            return AnyView(TripCancelledView())
         
         default:
             break
@@ -104,18 +122,21 @@ class HomeViewModel: NSObject, ObservableObject {
     
     func updateTrip(state: TripState) {
         guard let trip = trip else { return }
-        
-        print("=======")
-        print(trip.state)
-//        print(trip.travelTimeToPasseneger)
+
         var data = ["state": state.rawValue]
         if state == .accepted {
             
             data["travelTimeToPasseneger"] = trip.travelTimeToPasseneger
         }
         Firestore.firestore().collection("trips").document(trip.id).updateData(data) { _ in
-            
-            print("DEBUG: Did update trip with state: \(state)")
+        }
+    }
+    
+    func deleteTrip() {
+        guard let trip = trip else { return }
+        
+        Firestore.firestore().collection("trips").document(trip.id).delete { _ in
+            self.trip = nil
         }
     }
 }
